@@ -5,4 +5,8 @@ package io.github.alexlondon07.arquitecturamvpbase.views;
  */
 
 public interface IBaseView {
+
+    public void showProgress(int message);
+    public void hidePorgress();
+
 }
