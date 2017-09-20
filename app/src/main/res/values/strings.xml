@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">ArquitecturaMVPBase</string>
+    <string name="app_name">Arquitectura MVP Base</string>
     <string name="product_name">Nombre</string>
     <string name="product_description">Descripción</string>
     <string name="product_quantity">Cantidad</string>
     <string name="product_price">Precio</string>
     <string name="loading_message">Cargando...</string>
+    <string name="create_product_message">Creando...</string>
+    <string name="hint_product_name">Nombre</string>
+    <string name="hint_product_description">Descripción</string>
+    <string name="hint_product_quantity">Cantidad</string>
+    <string name="hint_product_price">Precio</string>
+    <string name="text_button_create_product">Crear</string>
 </resources>

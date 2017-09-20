@@ -24,4 +24,9 @@ public class ProductRepository {
         ArrayList<Product> products = services.getProductList();
         return products;
     }
+
+    public Product saveProduct(Product productParam) throws RetrofitError{
+        Product product = services.saveProduct(productParam);
+        return product;
+    }
 }
