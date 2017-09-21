@@ -45,7 +45,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
         setPresenter(new ProductPresenter());
         getPresenter().inject(this, getValidateInternet());
         createProgresDialog();
-        getPresenter().validateInternetProduct();
+        getPresenter().getPoductsPresenter();
         productList = (ListView) findViewById(R.id.product_list_view);
 
         btnNewProduct =  (FloatingActionButton) findViewById(R.id.activity_product_fab_launch_createproduct);
@@ -56,6 +56,12 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().getPoductsPresenter();
     }
 
 
