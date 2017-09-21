@@ -25,8 +25,8 @@ public class ProductRepository {
         return products;
     }
 
-    public Product saveProduct(Product productParam) throws RetrofitError{
-        Product product = services.saveProduct(productParam);
-        return product;
+    public Product saveProduct(Product product) throws RetrofitError{
+        Product products = services.saveProduct(product);
+        return products;
     }
 }

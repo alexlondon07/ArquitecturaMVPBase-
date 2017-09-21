@@ -1,4 +1,6 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
+import android.util.Log;
+
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
@@ -10,38 +12,31 @@ import retrofit.RetrofitError;
  */
 
 public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
-
     private ProductRepository productRepository;
 
     public ProductCreatePresenter() {
         productRepository = new ProductRepository();
     }
 
-    public void validateInternetProduct(Product product) {
-        if(getValidateInternet().isConnected()){
-            createThreadProduct(product);
-        }else{
-            //TODO: implementación alert
-        }
-    }
-
-    private void createThreadProduct(final Product product) {
+    public void createThreadProduct(final Product product) {
         getView().showProgress(R.string.loading_message);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                createProduct(product);
+                createNewProductService(product);
             }
         });
         thread.start();
     }
 
-    public void createProduct(Product product){
+    public void createNewProductService(Product product){
         try {
-            Product products = productRepository.saveProduct(product);
-            getView().responseCreateProduct(product);
-        }catch (RetrofitError retrofitError){
-            //TODO mostrar Alerta
+            Product responseProductCreated = productRepository.saveProduct(product);
+            getView().responseCreateProduct(true);
+        }catch (Exception e){
+            e.printStackTrace();
+            getView().showMessage("ERROR:"+e.getMessage());
+            getView().responseCreateProduct(false);
         }
     }
 

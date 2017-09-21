@@ -42,6 +42,11 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
         progressDialog.dismiss();
     }
 
+    @Override
+    public void showMessage(String msj) {
+
+    }
+
     public T getPresenter() {
         return presenter;
     }

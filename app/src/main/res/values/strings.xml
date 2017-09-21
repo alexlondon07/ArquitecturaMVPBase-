@@ -11,4 +11,6 @@
     <string name="hint_product_quantity">Cantidad</string>
     <string name="hint_product_price">Precio</string>
     <string name="text_button_create_product">Crear</string>
+    <string name="okCreateProduct">Se ha creado el producto correctamente</string>
+    <string name="errorCreateProduct">Error creando producto</string>
 </resources>

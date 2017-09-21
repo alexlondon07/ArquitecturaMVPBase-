@@ -9,5 +9,5 @@ import io.github.alexlondon07.arquitecturamvpbase.views.IBaseView;
 
 public interface ICreateProductView extends IBaseView {
 
-    void responseCreateProduct(Product product);
+    void responseCreateProduct(boolean isCreated);
 }
