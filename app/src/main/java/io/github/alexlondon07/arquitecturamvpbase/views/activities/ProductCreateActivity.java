@@ -104,16 +104,15 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    if(isCreated){
-                        Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.okCreateProduct), Toast.LENGTH_SHORT).show();
-                        ProductCreateActivity.this.finish();
-                    }else {
-                        Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.errorCreateProduct), Toast.LENGTH_SHORT).show();
-                    }
-                }catch (Throwable throwable){
-                    throwable.printStackTrace();
-                }
+        try {
+            if(isCreated){
+                Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.okCreateProduct), Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.errorCreateProduct), Toast.LENGTH_SHORT).show();
+            }
+        }catch (Throwable throwable){
+            throwable.printStackTrace();
+        }
             }
     });
         

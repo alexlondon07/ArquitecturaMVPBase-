@@ -4,6 +4,7 @@ package io.github.alexlondon07.arquitecturamvpbase.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
 
     private ListView productList;
     private ProductAdapter productAdapter;
+    private FloatingActionButton btnNewProduct;
 
     @Override
     public void showProductList(final ArrayList<Product> productArrayList) {
@@ -45,6 +47,15 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
         createProgresDialog();
         getPresenter().validateInternetProduct();
         productList = (ListView) findViewById(R.id.product_list_view);
+
+        btnNewProduct =  (FloatingActionButton) findViewById(R.id.activity_product_fab_launch_createproduct);
+        btnNewProduct.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, ProductCreateActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
