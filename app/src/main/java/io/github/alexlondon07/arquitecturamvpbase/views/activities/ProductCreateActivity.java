@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
@@ -110,6 +112,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
             }else {
                 Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.errorCreateProduct), Toast.LENGTH_SHORT).show();
             }
+            ProductCreateActivity.this.finish();
         }catch (Throwable throwable){
             throwable.printStackTrace();
         }

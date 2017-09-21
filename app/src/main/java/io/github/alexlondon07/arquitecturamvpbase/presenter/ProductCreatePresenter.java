@@ -1,6 +1,8 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
@@ -23,7 +25,13 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                createNewProductService(product);
+                try {
+                    createNewProductService(product);
+                } catch( RetrofitError retrofitError ){
+                    //TODO: mostrar alert
+                } finally {
+                    getView().hidePorgress();
+                }
             }
         });
         thread.start();
@@ -31,12 +39,18 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
 
     public void createNewProductService(Product product){
         try {
-            Product responseProductCreated = productRepository.saveProduct(product);
-            getView().responseCreateProduct(true);
+            if(getValidateInternet().isConnected()){
+                Product responseProductCreated = productRepository.saveProduct(product);
+                getView().responseCreateProduct(true);
+            }else{
+                getView().responseCreateProduct(false);
+            }
         }catch (Exception e){
             e.printStackTrace();
             getView().showMessage("ERROR:"+e.getMessage());
             getView().responseCreateProduct(false);
+        }finally {
+            getView().hidePorgress();
         }
     }
 
