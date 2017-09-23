@@ -22,13 +22,10 @@ public class ProductPresenter extends BasePresenter<IProductView> {
     public void getPoductsPresenter() {
 
         if(getValidateInternet().isConnected()){
-
             createThreadProduct();
-
         }else{
             //TODO: implementación alert
         }
-
     }
 
     private void createThreadProduct() {

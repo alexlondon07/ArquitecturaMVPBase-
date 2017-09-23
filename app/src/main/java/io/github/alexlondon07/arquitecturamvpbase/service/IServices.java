@@ -2,6 +2,7 @@ package io.github.alexlondon07.arquitecturamvpbase.service;
 
 import java.util.ArrayList;
 
+import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -20,7 +21,7 @@ public interface IServices {
     @POST("/products")
     Product saveProduct(@Body Product product);
 
-    @DELETE("/products")
-    Product deleteProduct(@Path("id") String id);
+    @DELETE("/products/{id}")
+    DeleteResponse deleteProduct(@Path("id") String id);
 
 }
