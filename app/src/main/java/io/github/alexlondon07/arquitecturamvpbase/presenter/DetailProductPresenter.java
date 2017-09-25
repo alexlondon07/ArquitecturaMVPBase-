@@ -32,24 +32,28 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                delete(id);
+                try {
+                    deleteProductService(id);
+                } catch( RetrofitError retrofitError ){
+                    retrofitError.printStackTrace();
+                } finally {
+                    getView().hidePorgress();
+                }
             }
         });
         thread.start();
     }
 
-    public  void delete (String id){
+    public void deleteProductService (String id){
         try{
             DeleteResponse deleteResponse = productRepository.deleteProduct(id);
-
-                if(deleteResponse.isStatus()){
-                    getView().showToast(R.string.okDelete);
-                }else{
-                    getView().showAlertDialogError(R.string.errorDelete);
-                }
-            }catch (RetrofitError retrofiterror){
-                retrofiterror.printStackTrace();
-
+            if(deleteResponse.isStatus()){
+                getView().showToast(R.string.okDelete);
+            }else{
+                getView().showAlertDialogError(R.string.errorDelete);
+            }
+        }catch (RetrofitError retrofitError){
+                retrofitError.printStackTrace();
         } finally {
             getView().hidePorgress();
         }

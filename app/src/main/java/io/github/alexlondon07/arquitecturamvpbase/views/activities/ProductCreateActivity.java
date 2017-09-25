@@ -1,4 +1,6 @@
 package io.github.alexlondon07.arquitecturamvpbase.views.activities;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -58,7 +60,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
                 product.setDescription(description.getText().toString());
                 product.setQuantity(quantity.getText().toString());
                 product.setPrice(price.getText().toString());
-                getPresenter().createThreadProduct(product);
+                getPresenter().createNewProduct(product);
             }
         });
     }
@@ -108,17 +110,44 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
             public void run() {
                 try {
                     if(isCreated){
-                        Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.okCreateProduct), Toast.LENGTH_LONG).show();
+                        showToast(R.string.okCreate);
                     }else {
-                        Toast.makeText(ProductCreateActivity.this, getResources().getString(R.string.errorCreateProduct), Toast.LENGTH_LONG).show();
+                        showToast(R.string.errorCreate);
                     }
                     ProductCreateActivity.this.finish();
                 }catch (Throwable throwable){
                     throwable.printStackTrace();
                 }
             }
-    });
-        
+        });
     }
 
+    @Override
+    public void showAlertDialog(int validate_internet) {
+        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+        dialog1.setTitle(R.string.important);
+        dialog1.setMessage(validate_internet);
+        dialog1.setCancelable(false);
+        dialog1.setNegativeButton(R.string.option_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancel();
+            }
+        });
+        dialog1.show();
+    }
+
+    @Override
+    public void showToast(final int msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ProductCreateActivity.this, msg, Toast.LENGTH_LONG).show();
+                ProductCreateActivity.this.finish();
+            }
+        });
+    }
+
+    private void cancel() {
+        finish();
+    }
 }

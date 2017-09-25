@@ -8,7 +8,7 @@ import io.github.alexlondon07.arquitecturamvpbase.views.IBaseView;
 
 public interface IDetailProductView  extends IBaseView {
 
-    void showAlertDialog(int validate_internet);
+    void showAlertDialog(int error);
 
     void showToast(int msg);
 
