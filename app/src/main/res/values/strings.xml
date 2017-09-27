@@ -23,4 +23,6 @@
     <string name="error">Error</string>
     <string name="new_error">Nuevo error</string>
     <string name="accept">Aceptar</string>
+    <string name="okUpdate">Registro actualizado correctamente</string>
+    <string name="errorUpdate">Error actualizando el registro</string>
 </resources>

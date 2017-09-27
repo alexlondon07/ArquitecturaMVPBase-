@@ -1,10 +1,6 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
-import android.util.Log;
-
-import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
-import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICreateProductView;

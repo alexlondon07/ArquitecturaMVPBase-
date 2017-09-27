@@ -1,7 +1,7 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
-import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
+import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
@@ -47,8 +47,8 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
 
     public void deleteProductService (String id){
         try{
-            DeleteResponse deleteResponse = productRepository.deleteProduct(id);
-            if(deleteResponse.isStatus()){
+            ProductResponse productResponse = productRepository.deleteProduct(id);
+            if(productResponse.isStatus()){
                 getView().showToast(R.string.okDelete);
             }else{
                 getView().showAlertDialogError(R.string.errorDelete);

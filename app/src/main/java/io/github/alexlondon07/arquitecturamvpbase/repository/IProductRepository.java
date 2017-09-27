@@ -2,7 +2,7 @@ package io.github.alexlondon07.arquitecturamvpbase.repository;
 
 import java.util.ArrayList;
 
-import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
+import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 
 /**
@@ -15,5 +15,7 @@ public interface IProductRepository {
 
     Product saveProduct(Product product);
 
-    DeleteResponse deleteProduct(String id) throws RepositoryError;
+    ProductResponse deleteProduct(String id) throws RepositoryError;
+
+    ProductResponse updateProduct(String id, Product product) throws  RepositoryError;
 }
