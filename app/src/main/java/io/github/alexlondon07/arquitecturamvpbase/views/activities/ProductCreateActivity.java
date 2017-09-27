@@ -108,16 +108,13 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    if(isCreated){
-                        showToast(R.string.okCreate);
-                    }else {
-                        showToast(R.string.errorCreate);
-                    }
-                    ProductCreateActivity.this.finish();
-                }catch (Throwable throwable){
-                    throwable.printStackTrace();
+                hidePorgress();
+                if(isCreated){
+                    showToast(R.string.okCreate);
+                }else {
+                    showToast(R.string.errorCreate);
                 }
+                ProductCreateActivity.this.finish();
             }
         });
     }
@@ -129,7 +126,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         dialog1.setMessage(validate_internet);
         dialog1.setCancelable(false);
         dialog1.setNegativeButton(R.string.option_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogo1, int id) {
+            public void onClick(DialogInterface dialog1, int id) {
                 cancel();
             }
         });
@@ -143,6 +140,16 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
             public void run() {
                 Toast.makeText(ProductCreateActivity.this, msg, Toast.LENGTH_LONG).show();
                 ProductCreateActivity.this.finish();
+            }
+        });
+    }
+
+    @Override
+    public void showAlertInternet(final int title,  final int message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
             }
         });
     }

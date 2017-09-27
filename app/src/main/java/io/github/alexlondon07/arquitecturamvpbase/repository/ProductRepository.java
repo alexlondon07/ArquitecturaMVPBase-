@@ -34,7 +34,11 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public DeleteResponse deleteProduct(String id) {
-        return services.deleteProduct(id);
+    public DeleteResponse deleteProduct(String id) throws RepositoryError {
+        try {
+            return services.deleteProduct(id);
+        }catch (RetrofitError retrofitError){
+            throw MapperError.convertRetrofitErrorToRepositoryError(retrofitError);
+        }
     }
 }

@@ -21,4 +21,6 @@
     <string name="option_cancel">Cancelar</string>
     <string name="important">Importante</string>
     <string name="error">Error</string>
+    <string name="new_error">Nuevo error</string>
+    <string name="accept">Aceptar</string>
 </resources>

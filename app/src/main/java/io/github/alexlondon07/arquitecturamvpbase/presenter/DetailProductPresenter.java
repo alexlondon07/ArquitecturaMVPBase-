@@ -3,6 +3,7 @@ package io.github.alexlondon07.arquitecturamvpbase.presenter;
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
+import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
 import retrofit.RetrofitError;
 
@@ -52,10 +53,8 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
             }else{
                 getView().showAlertDialogError(R.string.errorDelete);
             }
-        }catch (RetrofitError retrofitError){
-                retrofitError.printStackTrace();
-        } finally {
-            getView().hidePorgress();
+        } catch (RepositoryError repositoryError) {
+            getView().showToast(repositoryError.getMessage());
         }
     }
 }

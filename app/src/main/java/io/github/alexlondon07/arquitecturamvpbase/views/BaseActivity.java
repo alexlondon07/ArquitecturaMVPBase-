@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
+import io.github.alexlondon07.arquitecturamvpbase.helper.ShowAlertDialog;
 import io.github.alexlondon07.arquitecturamvpbase.helper.ValidateInternet;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.BasePresenter;
 
@@ -19,11 +20,13 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
     private IValidateInternet validateInternet;
     private ProgressDialog progressDialog;
     private T presenter;
+    private ShowAlertDialog showAlertDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         validateInternet = new ValidateInternet( BaseActivity.this );
+        this.showAlertDialog =  new ShowAlertDialog(this);
     }
 
 
@@ -69,5 +72,9 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
 
     public void setProgressDialog(ProgressDialog progressDialog) {
         this.progressDialog = progressDialog;
+    }
+
+    public ShowAlertDialog getShowAlertDialog() {
+        return showAlertDialog;
     }
 }

@@ -15,5 +15,5 @@ public interface IProductRepository {
 
     Product saveProduct(Product product);
 
-    DeleteResponse deleteProduct(String id);
+    DeleteResponse deleteProduct(String id) throws RepositoryError;
 }

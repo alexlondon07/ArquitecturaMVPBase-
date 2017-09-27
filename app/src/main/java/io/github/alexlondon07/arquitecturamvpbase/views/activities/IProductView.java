@@ -12,4 +12,8 @@ import io.github.alexlondon07.arquitecturamvpbase.views.IBaseView;
 public interface IProductView extends IBaseView{
 
     void showProductList(ArrayList<Product> productArrayList);
+
+    void showAlertDialogInternet(int error, int validate_internet);
+
+    void showAlertError(int error, int error2);
 }

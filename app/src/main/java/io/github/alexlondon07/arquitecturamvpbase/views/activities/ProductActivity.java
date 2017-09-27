@@ -1,6 +1,7 @@
 package io.github.alexlondon07.arquitecturamvpbase.views.activities;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +40,36 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
     }
 
     @Override
+    public void showAlertDialogInternet(final int title, int message) {
+        showAlertError(title, message);
+    }
+
+    @Override
+    public void showAlertError(int title, int message) {
+        showAlertDialog(title, message);
+    }
+
+    public void showAlertDialog(final int title, final int message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getShowAlertDialog().showAlertDialog(title, message, false, R.string.accept, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getPresenter().getProductList();
+                    }
+                }, R.string.option_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+            }
+        });
+    }
+
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
@@ -65,7 +96,6 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
     }
 
 
-
     public void callAdapter(final ArrayList<Product> productArrayList){
         productAdapter = new ProductAdapter(this, R.id.product_list_view, productArrayList);
         productList.setAdapter(productAdapter);
@@ -77,8 +107,5 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

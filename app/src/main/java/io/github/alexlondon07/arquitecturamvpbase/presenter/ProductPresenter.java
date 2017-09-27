@@ -20,11 +20,10 @@ public class ProductPresenter extends BasePresenter<IProductView> {
     }
 
     public void getPoductsPresenter() {
-
         if(getValidateInternet().isConnected()){
             createThreadProduct();
         }else{
-            //TODO: implementación alert
+            getView().showAlertDialogInternet(R.string.error, R.string.validate_internet);
         }
     }
 
@@ -41,11 +40,10 @@ public class ProductPresenter extends BasePresenter<IProductView> {
 
     public void getProductList(){
         try {
-
             ArrayList<Product> productArrayList = productRepository.getProductList();
             getView().showProductList(productArrayList);
         }catch (RetrofitError retrofitError){
-            //TODO mostrar Alerta
+            getView().showAlertError(R.string.error, R.string.validate_internet);
         }finally {
             getView().hidePorgress();
         }

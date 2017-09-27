@@ -8,10 +8,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
 import io.github.alexlondon07.arquitecturamvpbase.model.DeleteResponse;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.DetailProductPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
+import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
 
 import static org.mockito.Mockito.never;
@@ -38,7 +40,7 @@ public class DetailPresenterTest {
 
     @Before
     public void setUp() throws Exception{
-        /*Aqui se hace la relacion entre el activiy y el presentadod*/
+        /*Aqui se hace la relacion entre el activiy y el presentado*/
         detailProductPresenter = Mockito.spy(new DetailProductPresenter(iProductRepository));
         detailProductPresenter.inject(iDetailProductView, validateInternet);
     }
@@ -61,7 +63,7 @@ public class DetailPresenterTest {
     }
 
     @Test
-    public void methodDeleteProductShouldCallMethodDeleteProductInRepository(){
+    public void methodDeleteProductShouldCallMethodDeleteProductInRepository() throws RepositoryError {
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setStatus(true);
         String id = "gjhjg3jh4g35";
@@ -73,7 +75,7 @@ public class DetailPresenterTest {
     }
 
     @Test
-    public void methodDeleteProductShouldCallMethodDeleteProductInRepositoryFalse(){
+    public void methodDeleteProductShouldCallMethodDeleteProductInRepositoryFalse() throws RepositoryError {
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setStatus(false);
         String id = "gjhjg3jh4g35";
@@ -82,6 +84,17 @@ public class DetailPresenterTest {
         Assert.assertFalse(deleteResponse.isStatus());
         verify(iDetailProductView).showAlertDialogError(R.string.errorDelete);
         verify(iDetailProductView , never()).showToast(R.string.okDelete);
+    }
+
+    @Test
+    public void methodDeleteProductShouldShowAlertWhenRepositoryReturnError() throws RepositoryError{
+        String id = "gjhjg3jh4g35";
+        RepositoryError repositoryError = new RepositoryError(Constants.DEFAULT_ERROR);
+        when(iProductRepository.deleteProduct(id)).thenThrow(repositoryError);
+        detailProductPresenter.deleteProductService(id);
+        verify(iDetailProductView).showToast(repositoryError.getMessage());
+        verify(iDetailProductView, never()).showToast(R.string.okDelete);
+        verify(iDetailProductView, never()).showToast(R.string.errorDelete);
     }
 
 }

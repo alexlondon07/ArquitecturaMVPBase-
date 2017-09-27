@@ -78,7 +78,12 @@ public class DetailsActivity extends BaseActivity<DetailProductPresenter> implem
     }
 
     @Override
-    public void showToast(final int msg) {
+    public void showToast(int msg) {
+
+    }
+
+    @Override
+    public void showToast(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
