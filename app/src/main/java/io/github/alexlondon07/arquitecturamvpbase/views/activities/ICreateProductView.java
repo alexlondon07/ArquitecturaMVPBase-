@@ -15,5 +15,4 @@ public interface ICreateProductView extends IBaseView {
 
     void showToast(int msg);
 
-    void showAlertInternet(int title, int message);
 }

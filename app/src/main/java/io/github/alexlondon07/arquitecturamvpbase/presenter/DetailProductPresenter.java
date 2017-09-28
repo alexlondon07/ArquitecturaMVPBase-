@@ -33,13 +33,7 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    deleteProductService(id);
-                } catch( RetrofitError retrofitError ){
-                    retrofitError.printStackTrace();
-                } finally {
-                    getView().hidePorgress();
-                }
+                deleteProductService(id);
             }
         });
         thread.start();

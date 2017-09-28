@@ -30,17 +30,10 @@ public class ProductUpdatePresenter extends BasePresenter<IUpdateProductView>{
     }
 
     public void createThreadUpdateProduct(final String id, final Product product) {
-        getView().showProgress(R.string.loading_message);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-            try {
                 updateProductService(id, product);
-            } catch( RetrofitError retrofitError ){
-                getView().showToast(retrofitError.getMessage());
-            } finally {
-                getView().hidePorgress();
-            }
             }
         });
         thread.start();
@@ -48,8 +41,8 @@ public class ProductUpdatePresenter extends BasePresenter<IUpdateProductView>{
 
     public void updateProductService(String id, Product product) {
         try{
-            ProductResponse updateResponse = productRepository.updateProduct(id, product);
-            if(updateResponse.isStatus()){
+            ProductResponse productResponse = productRepository.updateProduct(id, product);
+            if(productResponse.isStatus()){
                 getView().showToast(R.string.okUpdate);
             }else{
                 getView().showAlertDialogError(R.string.errorUpdate);

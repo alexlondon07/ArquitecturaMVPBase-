@@ -45,7 +45,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public ProductResponse updateProduct(String id, Product product) throws RepositoryError {
         try{
-            return null;
+            return services.updateProduct(id, product);
         }catch (RetrofitError retrofitError){
             throw  MapperError.convertRetrofitErrorToRepositoryError(retrofitError);
         }

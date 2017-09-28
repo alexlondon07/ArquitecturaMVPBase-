@@ -79,18 +79,19 @@ public class DetailsActivity extends BaseActivity<DetailProductPresenter> implem
 
     @Override
     public void showToast(int msg) {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(DetailsActivity.this, R.string.okDelete, Toast.LENGTH_SHORT).show();
+                DetailsActivity.this.finish();
+            }
+        });
     }
 
     @Override
     public void showToast(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(DetailsActivity.this, R.string.okDelete, Toast.LENGTH_LONG).show();
-                DetailsActivity.this.finish();
-            }
-        });
+
+
     }
 
     @Override

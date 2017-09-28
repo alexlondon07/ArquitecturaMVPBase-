@@ -9,9 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
@@ -105,6 +103,16 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
                 Intent intent = new Intent(ProductActivity.this, DetailsActivity.class);
                 intent.putExtra(Constants.ITEM_PRODUCT, productArrayList.get(position));
                 startActivity(intent);
+            }
+        });
+
+        productList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ProductActivity.this, ProductUpdateActivity.class);
+                intent.putExtra(Constants.ITEM_PRODUCT,productArrayList.get(position));
+                startActivity(intent);
+                return true;
             }
         });
     }

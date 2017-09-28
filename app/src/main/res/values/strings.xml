@@ -25,4 +25,5 @@
     <string name="accept">Aceptar</string>
     <string name="okUpdate">Registro actualizado correctamente</string>
     <string name="errorUpdate">Error actualizando el registro</string>
+    <string name="text_button_update_product">Actualizar</string>
 </resources>

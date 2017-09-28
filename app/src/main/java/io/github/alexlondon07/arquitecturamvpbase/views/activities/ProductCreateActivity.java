@@ -144,16 +144,6 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         });
     }
 
-    @Override
-    public void showAlertInternet(final int title,  final int message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-    }
-
     private void cancel() {
         finish();
     }
