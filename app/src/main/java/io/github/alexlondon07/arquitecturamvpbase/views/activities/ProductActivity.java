@@ -74,7 +74,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
         setPresenter(new ProductPresenter());
         getPresenter().inject(this, getValidateInternet());
         createProgresDialog();
-        getPresenter().getPoductsPresenter();
+        getPresenter().getProductsPresenter();
         productList = (ListView) findViewById(R.id.product_list_view);
 
         btnNewProduct =  (FloatingActionButton) findViewById(R.id.activity_product_fab_launch_createproduct);
@@ -90,7 +90,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
     @Override
     protected void onResume() {
         super.onResume();
-        getPresenter().getPoductsPresenter();
+        getPresenter().getProductsPresenter();
     }
 
 
@@ -106,6 +106,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
             }
         });
 
+        //Method go to ProductUpdateActivity and Update Product
         productList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

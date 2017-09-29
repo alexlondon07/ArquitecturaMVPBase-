@@ -2,6 +2,7 @@ package io.github.alexlondon07.arquitecturamvpbase.views.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -36,9 +37,16 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
 
         //EditText
         name = (EditText) findViewById(R.id.activity_update_product_name);
+        name.addTextChangedListener(this);
+
         description = (EditText) findViewById(R.id.activity_update_product_description);
+        description.addTextChangedListener(this);
+
         quantity = (EditText) findViewById(R.id.activity_update_product_quantity);
+        quantity.addTextChangedListener(this);
+
         price = (EditText) findViewById(R.id.activity_update_product_price);
+        price.addTextChangedListener(this);
 
         //Button update
         btn_update = (Button) findViewById(R.id.activity_product_update_button_update);
@@ -60,8 +68,31 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
         product.setPrice(price.getText().toString());
     }
 
+    public void validateFields(){
+        if( name.getText().toString().isEmpty() ||
+                price.getText().toString().isEmpty() ||
+                quantity.getText().toString().isEmpty()  ||
+                description.getText().toString().isEmpty()){
+            disableButton(btn_update);
+        }else{
+            enableButton(btn_update);
+        }
+    }
+
+
+    public void enableButton(Button button){
+        btn_update.setEnabled(true);
+        btn_update.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAccent));
+    }
+
+    public void disableButton(Button button){
+        btn_update.setEnabled(false);
+        btn_update.setBackgroundColor(ContextCompat.getColor(this,R.color.colorWhite));
+    }
+
     public void getDataItem(){
         product = (Product) getIntent().getSerializableExtra(Constants.ITEM_PRODUCT);
+
         name.setHint(product.getName());
         description.setHint(product.getDescription());
         quantity.setHint(product.getPrice());
@@ -93,7 +124,7 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
 
     @Override
     public void afterTextChanged(Editable editable) {
-
+        validateFields();
     }
 
     @Override
@@ -101,13 +132,13 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-            hidePorgress();
-            if(isUpdated){
-                showToast(R.string.okUpdate);
-            }else {
+                hidePorgress();
+                if(isUpdated)
+                    showToast(R.string.okUpdate);
+                else
                     showToast(R.string.errorUpdate);
-            }
-            ProductUpdateActivity.this.finish();
+
+                ProductUpdateActivity.this.finish();
             }
         });
     }

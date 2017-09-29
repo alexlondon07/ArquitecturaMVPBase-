@@ -55,14 +55,18 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Product product = new Product();
-                product.setName(name.getText().toString());
-                product.setDescription(description.getText().toString());
-                product.setQuantity(quantity.getText().toString());
-                product.setPrice(price.getText().toString());
-                getPresenter().createNewProduct(product);
+                setDataItem();
             }
         });
+    }
+
+    private void setDataItem() {
+        Product product = new Product();
+        product.setName(name.getText().toString());
+        product.setDescription(description.getText().toString());
+        product.setQuantity(quantity.getText().toString());
+        product.setPrice(price.getText().toString());
+        getPresenter().createNewProduct(product);
     }
 
     public void validateFields(){
@@ -109,28 +113,29 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
             @Override
             public void run() {
                 hidePorgress();
-                if(isCreated){
+                if(isCreated)
                     showToast(R.string.okCreate);
-                }else {
+                else
                     showToast(R.string.errorCreate);
-                }
+
                 ProductCreateActivity.this.finish();
             }
         });
     }
 
     @Override
-    public void showAlertDialog(int validate_internet) {
-        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
-        dialog1.setTitle(R.string.important);
-        dialog1.setMessage(validate_internet);
-        dialog1.setCancelable(false);
-        dialog1.setNegativeButton(R.string.option_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog1, int id) {
-                cancel();
+    public void showAlertDialog(int message) {
+        getShowAlertDialog().showAlertDialog(R.string.error, message, false, R.string.accept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }, R.string.option_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                closeActivity();
             }
         });
-        dialog1.show();
     }
 
     @Override
@@ -138,13 +143,13 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(ProductCreateActivity.this, msg, Toast.LENGTH_LONG).show();
-                ProductCreateActivity.this.finish();
+                Toast.makeText(ProductCreateActivity.this, msg, Toast.LENGTH_SHORT).show();
+                closeActivity();
             }
         });
     }
 
-    private void cancel() {
-        finish();
+    private void closeActivity() {
+        ProductCreateActivity.this.finish();
     }
 }

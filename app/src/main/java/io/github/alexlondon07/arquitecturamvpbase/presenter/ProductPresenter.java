@@ -19,7 +19,7 @@ public class ProductPresenter extends BasePresenter<IProductView> {
         productRepository = new ProductRepository();
     }
 
-    public void getPoductsPresenter() {
+    public void getProductsPresenter() {
         if(getValidateInternet().isConnected()){
             createThreadProduct();
         }else{
