@@ -20,14 +20,20 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
         productRepository = new ProductRepository();
     }
 
-    public void createNewProduct(Product product) {
+
+    public void createNewProduct(String name, String description, String price, String quantity) {
+                Product product = new Product();
+                product.setName(name);
+                product.setDescription(description);
+                product.setPrice(price);
+                product.setQuantity(quantity);
         if (getValidateInternet().isConnected()){
-            product.setId(UUID.randomUUID().toString());
             createThreadProduct(product);
         }else{
             getView().showAlertDialog(R.string.validate_internet);
         }
     }
+
 
     public void createThreadProduct(final Product product) {
         getView().showProgress(R.string.loading_message);

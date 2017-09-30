@@ -66,7 +66,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         product.setDescription(description.getText().toString());
         product.setQuantity(quantity.getText().toString());
         product.setPrice(price.getText().toString());
-        getPresenter().createNewProduct(product);
+        getPresenter().createNewProduct(name.getText().toString(), description.getText().toString(), quantity.getText().toString(),price.getText().toString());
     }
 
     public void validateFields(){
