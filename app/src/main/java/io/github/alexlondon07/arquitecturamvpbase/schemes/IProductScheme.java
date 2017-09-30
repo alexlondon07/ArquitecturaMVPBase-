@@ -15,7 +15,7 @@ public interface IProductScheme {
 
     String PRODUCT_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + PRODUCT_TABLE + " ("
             + COLUMN_ID + " TEXT PRIMARY KEY, "
-            + COLUMN_PRODUCT_NAME + " TEXT IS NOT NULL, "
+            + COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
             + COLUMN_PRODUCT_DESCRIPTION + " TEXT, "
             + COLUMN_PRODUCT_QUANTITY + " TEXT, "
             + COLUMN_PRODUCT_PRICE + " TEXT "
@@ -25,7 +25,6 @@ public interface IProductScheme {
     String [] PRODUCT_COLUMNS = new String[]{
             COLUMN_ID, COLUMN_PRODUCT_NAME, COLUMN_PRODUCT_DESCRIPTION, COLUMN_PRODUCT_QUANTITY, COLUMN_PRODUCT_PRICE
     };
-
 
 
 }

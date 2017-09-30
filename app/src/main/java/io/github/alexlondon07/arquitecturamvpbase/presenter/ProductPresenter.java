@@ -1,10 +1,15 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
+import io.github.alexlondon07.arquitecturamvpbase.dao.ProductDao;
+import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
+import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IProductView;
 import retrofit.RetrofitError;
 
@@ -32,10 +37,23 @@ public class ProductPresenter extends BasePresenter<IProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                getProductList();
+                //getProductList();
+                getProductListLocal();
             }
         });
         thread.start();
+    }
+
+    private void getProductListLocal() {
+        try {
+            ArrayList<Product> productArrayList = Database.productDao.fetchAllProducts();
+            getView().showProductList(productArrayList);
+        }catch (Exception ex) {
+            Log.w("ErrorGetProductList", ex.getMessage());
+            //getView().showAlertError(R.string.error, ex.getMessage());
+        }finally {
+            getView().hidePorgress();
+        }
     }
 
     public void getProductList(){

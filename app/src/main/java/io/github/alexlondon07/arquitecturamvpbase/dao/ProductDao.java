@@ -28,7 +28,7 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
     @Override
     public ArrayList<Product> fetchAllProducts() {
         ArrayList<Product> productList =  new ArrayList<>();
-        super.query(PRODUCT_TABLE, PRODUCT_COLUMNS,null, null, COLUMN_PRODUCT_NAME);
+        cursor = super.query(PRODUCT_TABLE, PRODUCT_COLUMNS,null, null, COLUMN_PRODUCT_NAME);
         if(cursor != null){
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
