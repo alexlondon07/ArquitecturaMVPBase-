@@ -48,7 +48,7 @@ public class DetailPresenterTest {
 
     @Before
     public void setUp() throws Exception{
-        /*Aqui se hace la relacion entre el activiy y el presentado*/
+        /*Aqui se hace la relacion entre el activity y el presentado*/
         detailProductPresenter = Mockito.spy(new DetailProductPresenter(iProductRepository));
         detailProductPresenter.inject(iDetailProductView, validateInternet);
 

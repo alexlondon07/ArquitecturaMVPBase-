@@ -81,13 +81,13 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
 
 
     public void enableButton(Button button){
-        btn_update.setEnabled(true);
-        btn_update.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAccent));
+        button.setEnabled(true);
+        button.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAccent));
     }
 
     public void disableButton(Button button){
-        btn_update.setEnabled(false);
-        btn_update.setBackgroundColor(ContextCompat.getColor(this,R.color.colorWhite));
+        button.setEnabled(false);
+        button.setBackgroundColor(ContextCompat.getColor(this,R.color.colorWhite));
     }
 
     public void getDataItem(){

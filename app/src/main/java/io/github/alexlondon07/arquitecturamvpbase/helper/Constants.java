@@ -15,4 +15,9 @@ public class Constants {
     public static final int UNAUTHORIZED_ERROR_CODE = 401;
     public static final int NOT_FOUND_ERROR_CODE = 404;
 
+    //DATABASE
+    public  static final String DATABASE_NAME = "shopping_db.db";
+    public  static final int DATABASE_VERSION = 1;
+
+
 }
