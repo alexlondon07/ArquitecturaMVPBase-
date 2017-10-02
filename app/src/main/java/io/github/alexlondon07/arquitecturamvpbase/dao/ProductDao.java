@@ -72,6 +72,17 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
     }
 
     @Override
+    public Boolean deleteProduct(String id) {
+        try {
+            return super.delete(PRODUCT_TABLE, COLUMN_ID +"="+id, null) > 0;
+            //return super.delete(PRODUCT_TABLE, COLUMN_ID, null) > 0;
+        }catch (SQLiteConstraintException ex){
+            Log.e("DBErrorDeleteProduct", ex.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     protected Product cursorToEntity(Cursor cursor) {
         Product product = new Product();
         int nameIndex;

@@ -14,7 +14,7 @@ public interface IProductScheme {
     String COLUMN_PRODUCT_PRICE = "product_price";
 
     String PRODUCT_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + PRODUCT_TABLE + " ("
-            + COLUMN_ID + " TEXT PRIMARY KEY, "
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
             + COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
             + COLUMN_PRODUCT_DESCRIPTION + " TEXT, "
             + COLUMN_PRODUCT_QUANTITY + " TEXT, "

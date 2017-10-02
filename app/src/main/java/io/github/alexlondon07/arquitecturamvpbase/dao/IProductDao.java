@@ -12,5 +12,6 @@ public interface IProductDao {
 
     public ArrayList<Product> fetchAllProducts();
     public Boolean createProduct(Product product);
+    public Boolean deleteProduct(String id);
 
 }

@@ -16,4 +16,6 @@ public interface IProductView extends IBaseView{
     void showAlertDialogInternet(int error, int validate_internet);
 
     void showAlertError(int error, int error2);
+
+    void showAlertError(int error, String error2);
 }

@@ -1,6 +1,9 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 
+import android.util.Log;
+
 import io.github.alexlondon07.arquitecturamvpbase.R;
+import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
@@ -20,11 +23,12 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
     }
 
     public void deleteProduct(String id) {
-        if(getValidateInternet().isConnected()){
+        /*if(getValidateInternet().isConnected()){
             deleteThreadDeleteProduct(id);
         }else {
             getView().showAlertDialog(R.string.validate_internet);
-        }
+        }*/
+        deleteThreadDeleteProduct(id);
     }
 
 
@@ -33,10 +37,26 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                deleteProductService(id);
+                //deleteProductService(id);
+                deleteProductLocal(id);
             }
         });
         thread.start();
+    }
+
+
+    private void deleteProductLocal(String id) {
+        try {
+            boolean isDeleted = Database.productDao.deleteProduct(id);
+            if(isDeleted){
+                getView().showToast(R.string.okDelete);
+            }else{
+                getView().showAlertDialogError(R.string.errorDelete);
+            }
+        }catch(Exception ex){
+            Log.w("ErrorDeleteProductLocal", ex.getMessage());
+            getView().showToast(ex.getMessage());
+        }
     }
 
     public void deleteProductService (String id){

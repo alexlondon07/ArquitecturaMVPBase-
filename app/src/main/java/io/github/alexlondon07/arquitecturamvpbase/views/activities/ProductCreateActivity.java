@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
+import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
+import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 
 public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> implements ICreateProductView, TextWatcher {
@@ -26,7 +28,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_product);
-        setPresenter(new ProductCreatePresenter());
+        setPresenter(new ProductCreatePresenter(new ProductRepository()));
         getPresenter().inject(this, getValidateInternet());
         createProgresDialog();
         initialize();

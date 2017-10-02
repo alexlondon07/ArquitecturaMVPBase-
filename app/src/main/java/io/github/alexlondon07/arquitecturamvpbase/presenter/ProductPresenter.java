@@ -25,11 +25,12 @@ public class ProductPresenter extends BasePresenter<IProductView> {
     }
 
     public void getProductsPresenter() {
-        if(getValidateInternet().isConnected()){
+        /*if(getValidateInternet().isConnected()){
             createThreadProduct();
         }else{
             getView().showAlertDialogInternet(R.string.error, R.string.validate_internet);
-        }
+        }*/
+        createThreadProduct();
     }
 
     private void createThreadProduct() {
@@ -50,7 +51,7 @@ public class ProductPresenter extends BasePresenter<IProductView> {
             getView().showProductList(productArrayList);
         }catch (Exception ex) {
             Log.w("ErrorGetProductList", ex.getMessage());
-            //getView().showAlertError(R.string.error, ex.getMessage());
+            getView().showAlertError(R.string.error, ex.getMessage());
         }finally {
             getView().hidePorgress();
         }

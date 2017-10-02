@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -13,12 +14,15 @@ import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.DetailProductPresenter;
+import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductUpdatePresenter;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
+import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICreateProductView;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IUpdateProductView;
 
+import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,12 +43,20 @@ public class DetailPresenterTest {
     @Mock
     IDetailProductView iDetailProductView;
 
+    @Mock
+    ICreateProductView iCreateProductView;
+
     DetailProductPresenter detailProductPresenter;
 
     ProductUpdatePresenter productUpdatePresenter;
 
+    ProductCreatePresenter createProductPresenter;
+
     @Mock
     IUpdateProductView iUpdateProductView;
+
+    @InjectMocks
+    Product product;
 
     @Before
     public void setUp() throws Exception{
@@ -54,6 +66,9 @@ public class DetailPresenterTest {
 
         productUpdatePresenter = Mockito.spy(new ProductUpdatePresenter(iProductRepository));
         productUpdatePresenter.inject(iUpdateProductView, validateInternet);
+
+        createProductPresenter = Mockito.spy(new ProductCreatePresenter(iProductRepository));
+        createProductPresenter.inject(iCreateProductView, validateInternet);
     }
 
     @Test
@@ -122,5 +137,16 @@ public class DetailPresenterTest {
         verify(productUpdatePresenter).updateProductService(id, product);
         verify(iUpdateProductView).showToast(R.string.okUpdate);
         verify(iUpdateProductView, never()).showToast(R.string.errorUpdate);
+    }
+
+    @Test
+    public void methodValidateInternetShouldCallMethodCreateThread(){
+        product.setName("empanada");
+        product.setDescription("empanada");
+        product.setQuantity("empanada");
+        product.setPrice("empanada");
+        when(validateInternet.isConnected()).thenReturn(true);
+        createProductPresenter.createNewProduct("empanada", "empanada", "empanada", "empanada");
+        verify(createProductPresenter).createThreadProduct(refEq(product));
     }
 }

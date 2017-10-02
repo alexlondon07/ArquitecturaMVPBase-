@@ -47,6 +47,10 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
         showAlertDialog(title, message);
     }
 
+    @Override
+    public void showAlertError(int error, String error2) {
+    }
+
     public void showAlertDialog(final int title, final int message) {
         runOnUiThread(new Runnable() {
             @Override

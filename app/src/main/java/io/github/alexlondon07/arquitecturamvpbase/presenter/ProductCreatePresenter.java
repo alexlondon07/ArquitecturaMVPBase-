@@ -5,6 +5,7 @@ import java.util.UUID;
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
+import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICreateProductView;
 import retrofit.RetrofitError;
@@ -14,24 +15,27 @@ import retrofit.RetrofitError;
  */
 
 public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
-    private ProductRepository productRepository;
 
-    public ProductCreatePresenter() {
-        productRepository = new ProductRepository();
+    private IProductRepository productRepository;
+
+    public ProductCreatePresenter(IProductRepository productRepository) {
+        this.productRepository =  productRepository;
     }
 
 
     public void createNewProduct(String name, String description, String price, String quantity) {
-                Product product = new Product();
-                product.setName(name);
-                product.setDescription(description);
-                product.setPrice(price);
-                product.setQuantity(quantity);
-        if (getValidateInternet().isConnected()){
+        Product product = new Product();
+        //product.setId(UUID.randomUUID().toString());
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setQuantity(quantity);
+        /*if (getValidateInternet().isConnected()){
             createThreadProduct(product);
         }else{
             getView().showAlertDialog(R.string.validate_internet);
-        }
+        }*/
+        createThreadProduct(product);
     }
 
 
