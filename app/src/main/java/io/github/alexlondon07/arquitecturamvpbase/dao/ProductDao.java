@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.providers.DbContentProvider;
 import io.github.alexlondon07.arquitecturamvpbase.schemes.IProductScheme;
@@ -75,9 +76,19 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
     public Boolean deleteProduct(String id) {
         try {
             return super.delete(PRODUCT_TABLE, COLUMN_ID +"="+id, null) > 0;
-            //return super.delete(PRODUCT_TABLE, COLUMN_ID, null) > 0;
         }catch (SQLiteConstraintException ex){
             Log.e("DBErrorDeleteProduct", ex.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean updateProduct(String id, Product product) {
+        setContentValue(product);
+        try{
+            return super.update(PRODUCT_TABLE, getContentValue(), COLUMN_ID + "="+id, null) > 0;
+        }catch (SQLiteConstraintException ex){
+            Log.e("DBErrorUpdateProduct", ex.getMessage());
             return false;
         }
     }

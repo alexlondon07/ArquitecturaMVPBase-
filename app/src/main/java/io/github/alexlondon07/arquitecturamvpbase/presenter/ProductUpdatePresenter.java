@@ -1,6 +1,7 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
+import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
@@ -20,23 +21,34 @@ public class ProductUpdatePresenter extends BasePresenter<IUpdateProductView>{
         this.productRepository = productRepository;
     }
 
-    public void updateProduct(String id, Product product) {
-        if(getValidateInternet().isConnected()){
+    public void updateProductPresenter(String id, Product product) {
+        /*if(getValidateInternet().isConnected()){
             createThreadUpdateProduct(id, product);
         }else {
             getView().showAlertDialog(R.string.validate_internet);
-        }
-
+        }*/
+        createThreadUpdateProduct(id, product);
     }
 
     public void createThreadUpdateProduct(final String id, final Product product) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                updateProductService(id, product);
+                //updateProductService(id, product);
+                updateProductLocal(id, product);
             }
         });
         thread.start();
+    }
+
+    private void updateProductLocal(String id, Product product) {
+        try {
+            Boolean isUpdated = Database.productDao.updateProduct(id, product);
+            getView().responseUpdateProduct(isUpdated);
+        }catch (Exception ex){
+            getView().responseUpdateProduct(false);
+        }
+
     }
 
     public void updateProductService(String id, Product product) {

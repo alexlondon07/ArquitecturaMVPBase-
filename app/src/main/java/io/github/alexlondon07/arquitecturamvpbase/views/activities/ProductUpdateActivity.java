@@ -105,7 +105,7 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
     }
 
     public void updateProduct(Product product){
-        getPresenter().updateProduct(product.getId(),product);
+        getPresenter().updateProductPresenter(product.getId(),product);
     }
 
     public void closeActivity(){
@@ -132,7 +132,7 @@ public class ProductUpdateActivity extends BaseActivity<ProductUpdatePresenter> 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                hidePorgress();
+                //hidePorgress();
                 if(isUpdated)
                     showToast(R.string.okUpdate);
                 else
