@@ -29,7 +29,7 @@ public class CustomerPresenter extends BasePresenter<ICustomerView> {
 
     }
 
-    private void createThreadCustomer() {
+    public void createThreadCustomer() {
         getView().showProgress(R.string.loading_message);
         Thread thread = new Thread(new Runnable() {
             @Override

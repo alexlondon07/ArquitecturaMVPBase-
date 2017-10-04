@@ -8,22 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-
 import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
-import io.github.alexlondon07.arquitecturamvpbase.model.CustomerResponse;
-import io.github.alexlondon07.arquitecturamvpbase.model.Location;
-import io.github.alexlondon07.arquitecturamvpbase.model.PhoneList;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerCreatePresenter;
-import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.DetailProductPresenter;
-import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
-import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductUpdatePresenter;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ICustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
@@ -32,8 +23,6 @@ import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICustomerView
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IUpdateProductView;
 
-import static android.R.attr.id;
-import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,7 +56,6 @@ public class DetailPresenterTest {
 
     DetailProductPresenter detailProductPresenter;
 
-    ProductUpdatePresenter productUpdatePresenter;
 
     CustomerCreatePresenter customerCreatePresenter;
 
@@ -85,9 +73,6 @@ public class DetailPresenterTest {
         /*Aqui se hace la relacion entre el activity y el presentado*/
         detailProductPresenter = Mockito.spy(new DetailProductPresenter(iProductRepository));
         detailProductPresenter.inject(iDetailProductView, validateInternet);
-
-        productUpdatePresenter = Mockito.spy(new ProductUpdatePresenter(iProductRepository));
-        productUpdatePresenter.inject(iUpdateProductView, validateInternet);
     }
 
     @Test
@@ -144,23 +129,6 @@ public class DetailPresenterTest {
         verify(iDetailProductView, never()).showToast(R.string.okDelete);
         verify(iDetailProductView, never()).showToast(R.string.errorDelete);
     }
-
-    @Test
-    public void methodDeleteProductShouldCallMethodUpdateProductInRepositoryTrue() throws RepositoryError{
-        String id = "gjhjg3jh4g35";
-        RepositoryError repositoryError = new RepositoryError(Constants.DEFAULT_ERROR);
-        Product product = new Product();
-
-        ProductResponse productResponde = new ProductResponse();
-        productResponde.setStatus(true);
-
-        when(iProductRepository.updateProduct(id, product)).thenReturn(productResponde);
-        productUpdatePresenter.updateProductService(id, product);
-        verify(productUpdatePresenter).updateProductService(id, product);
-        verify(iUpdateProductView).showToast(R.string.okUpdate);
-        verify(iUpdateProductView, never()).showToast(R.string.errorUpdate);
-    }
-
 
     @Test
     public void methodCreateCustomerShouldCall() throws RepositoryError{
