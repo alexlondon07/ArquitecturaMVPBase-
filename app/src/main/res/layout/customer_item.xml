@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
 
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/android_6_xxl"/>
 
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/item_name_customer"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="0.4"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:text="Nombre"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Alexander" />
+
+    <TextView
+        android:id="@+id/item_surname_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_name_customer"
+        android:layout_below="@+id/item_name_customer"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="Apellido"
+        tools:text="Londoño" />
 
 
-        <TextView
-            android:id="@+id/item_name_customer"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Customer"
-            />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

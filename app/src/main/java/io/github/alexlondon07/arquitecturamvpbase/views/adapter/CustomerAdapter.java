@@ -24,7 +24,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
     private ArrayList<Customer> customerArrayList;
     private Activity context;
     private Customer customer;
-    private TextView name;
+    private TextView name, surname, phonelist;
 
 
     public CustomerAdapter(Activity context,  int resource, ArrayList<Customer> customerArrayList){
@@ -38,11 +38,13 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         this.customer = this.customerArrayList.get(position);
         loadView(convertView);
         name.setText(customer.getName());
+        surname.setText(customer.getSurname());
         return convertView;
     }
 
     public void loadView(View convertView){
         name = (TextView) convertView.findViewById(R.id.item_name_customer);
+        surname = (TextView) convertView.findViewById(R.id.item_surname_customer);
     }
 
 
