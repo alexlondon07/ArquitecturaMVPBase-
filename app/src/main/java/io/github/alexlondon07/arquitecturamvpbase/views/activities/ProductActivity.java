@@ -27,6 +27,28 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
     private ProductAdapter productAdapter;
     private FloatingActionButton btnNewProduct;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product);
+        setPresenter(new ProductPresenter());
+        getPresenter().inject(this, getValidateInternet());
+        createProgresDialog();
+        getPresenter().getProductsPresenter();
+        productList = (ListView) findViewById(R.id.product_list_view);
+
+        btnNewProduct =  (FloatingActionButton) findViewById(R.id.activity_product_fab_launch_createproduct);
+        btnNewProduct.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, ProductCreateActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
     @Override
     public void showProductList(final ArrayList<Product> productArrayList) {
        runOnUiThread(new Runnable() {
@@ -39,7 +61,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
 
     @Override
     public void showAlertDialogInternet(final int title, int message) {
-        showAlertError(title, message);
+        showAlertDialog(title, message);
     }
 
     @Override
@@ -70,26 +92,6 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements I
         });
     }
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
-        setPresenter(new ProductPresenter());
-        getPresenter().inject(this, getValidateInternet());
-        createProgresDialog();
-        getPresenter().getProductsPresenter();
-        productList = (ListView) findViewById(R.id.product_list_view);
-
-        btnNewProduct =  (FloatingActionButton) findViewById(R.id.activity_product_fab_launch_createproduct);
-        btnNewProduct.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductActivity.this, ProductCreateActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     @Override
     protected void onResume() {

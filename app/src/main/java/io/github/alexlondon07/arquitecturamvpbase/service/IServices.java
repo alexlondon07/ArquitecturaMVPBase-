@@ -2,6 +2,7 @@ package io.github.alexlondon07.arquitecturamvpbase.service;
 
 import java.util.ArrayList;
 
+import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import retrofit.http.Body;
@@ -27,5 +28,12 @@ public interface IServices {
 
     @PUT("/products/{id}")
     ProductResponse updateProduct(@Path("id") String id, @Body Product product);
+
+
+    @GET("/customers")
+    ArrayList<Customer> getCustomerList();
+
+    @POST("/customers")
+    Customer saveCustomer(@Body Customer customer);
 
 }

@@ -54,7 +54,6 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
                 getView().showAlertDialogError(R.string.errorDelete);
             }
         }catch(Exception ex){
-            Log.w("ErrorDeleteProductLocal", ex.getMessage());
             getView().showToast(ex.getMessage());
         }
     }

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
+import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
@@ -68,4 +69,5 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
             getView().responseCreateProduct(false);
         }
     }
+
 }

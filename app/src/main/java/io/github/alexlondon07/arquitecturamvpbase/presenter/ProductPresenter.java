@@ -18,6 +18,7 @@ import retrofit.RetrofitError;
  */
 
 public class ProductPresenter extends BasePresenter<IProductView> {
+
     private ProductRepository productRepository;
 
     public ProductPresenter() {

@@ -47,6 +47,4 @@ public class ProductAdapter extends ArrayAdapter<Product>{
         name = (TextView) convertView.findViewById(R.id.item_name_product);
     }
 
-
-
 }

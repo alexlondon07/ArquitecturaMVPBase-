@@ -62,16 +62,8 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
         return validateInternet;
     }
 
-    public void setValidateInternet(IValidateInternet validateInternet) {
-        this.validateInternet = validateInternet;
-    }
-
     public ProgressDialog getProgressDialog() {
         return progressDialog;
-    }
-
-    public void setProgressDialog(ProgressDialog progressDialog) {
-        this.progressDialog = progressDialog;
     }
 
     public ShowAlertDialog getShowAlertDialog() {

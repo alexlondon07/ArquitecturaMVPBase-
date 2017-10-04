@@ -9,19 +9,30 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+
 import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
+import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
+import io.github.alexlondon07.arquitecturamvpbase.model.CustomerResponse;
+import io.github.alexlondon07.arquitecturamvpbase.model.Location;
+import io.github.alexlondon07.arquitecturamvpbase.model.PhoneList;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
+import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerCreatePresenter;
+import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.DetailProductPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductUpdatePresenter;
+import io.github.alexlondon07.arquitecturamvpbase.repository.ICustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICreateProductView;
+import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICustomerView;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IDetailProductView;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IUpdateProductView;
 
+import static android.R.attr.id;
 import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -40,23 +51,34 @@ public class DetailPresenterTest {
     @Mock
     IProductRepository iProductRepository;
 
+
+    @Mock
+    ICustomerRepository iCustomerRepository;
+
+
     @Mock
     IDetailProductView iDetailProductView;
 
     @Mock
     ICreateProductView iCreateProductView;
 
+    @Mock
+    ICustomerView iCustomerView;
+
     DetailProductPresenter detailProductPresenter;
 
     ProductUpdatePresenter productUpdatePresenter;
 
-    ProductCreatePresenter createProductPresenter;
+    CustomerCreatePresenter customerCreatePresenter;
 
     @Mock
     IUpdateProductView iUpdateProductView;
 
     @InjectMocks
     Product product;
+
+    @InjectMocks
+    Customer customer;
 
     @Before
     public void setUp() throws Exception{
@@ -66,9 +88,6 @@ public class DetailPresenterTest {
 
         productUpdatePresenter = Mockito.spy(new ProductUpdatePresenter(iProductRepository));
         productUpdatePresenter.inject(iUpdateProductView, validateInternet);
-
-        createProductPresenter = Mockito.spy(new ProductCreatePresenter(iProductRepository));
-        createProductPresenter.inject(iCreateProductView, validateInternet);
     }
 
     @Test
@@ -79,6 +98,7 @@ public class DetailPresenterTest {
         verify(detailProductPresenter).deleteThreadDeleteProduct(id);
     }
 
+    //BAD TEST
     @Test
     public void methodDeleteProductWithoutConnectionShouldShowAlertDialog(){
         String id = "gjhjg3jh4g35";
@@ -88,6 +108,7 @@ public class DetailPresenterTest {
         verify(detailProductPresenter, never()).deleteThreadDeleteProduct(id);
     }
 
+    //BAD TEST
     @Test
     public void methodDeleteProductShouldCallMethodDeleteProductInRepository() throws RepositoryError {
         ProductResponse productResponse = new ProductResponse();
@@ -100,6 +121,7 @@ public class DetailPresenterTest {
         verify(iDetailProductView, never()).showAlertDialogError(R.string.errorDelete);
     }
 
+    //BAD TEST
     @Test
     public void methodDeleteProductShouldCallMethodDeleteProductInRepositoryFalse() throws RepositoryError {
         ProductResponse productResponse = new ProductResponse();
@@ -139,14 +161,37 @@ public class DetailPresenterTest {
         verify(iUpdateProductView, never()).showToast(R.string.errorUpdate);
     }
 
+
     @Test
-    public void methodValidateInternetShouldCallMethodCreateThread(){
-        product.setName("empanada");
-        product.setDescription("empanada");
-        product.setQuantity("empanada");
-        product.setPrice("empanada");
+    public void methodCreateCustomerShouldCall() throws RepositoryError{
+        RepositoryError repositoryError = new RepositoryError(Constants.DEFAULT_ERROR);
+        Customer customer = new Customer();
         when(validateInternet.isConnected()).thenReturn(true);
-        createProductPresenter.createNewProduct("empanada", "empanada", "empanada", "empanada");
-        verify(createProductPresenter).createThreadProduct(refEq(product));
+        CustomerCreatePresenter.createNewCustomer(customer);
+        verify(customerCreatePresenter).createThreadCreateCustomer(customer);
     }
+
+
+    /*public Customer getCustomersList(){
+        Customer customer = new Customer();
+
+        customer.setName("Alexander");
+        customer.setSurname("Londoño Espejo");
+
+        //PhoneList
+        ArrayList<PhoneList> phoneLists = new ArrayList<>();
+
+        PhoneList phoneList = new PhoneList();
+        phoneList.setDescripcion("Phone mobile");
+        phoneList.setNumber("3122195522");
+
+        //Location
+        Location location = new Location();
+        location.setType("Point");
+        Double coordinates[] = {-75.0003,42.002};
+        location.setCoordinates(coordinates);
+
+        customer.setPhoneList(phoneLists);
+        return customer;
+    }*/
 }
