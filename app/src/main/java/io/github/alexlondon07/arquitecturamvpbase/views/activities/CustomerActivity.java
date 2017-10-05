@@ -26,6 +26,7 @@ public class CustomerActivity extends BaseActivity<CustomerPresenter> implements
 
     private ListView customerList;
     private CustomerAdapter customerAdapter;
+    private FloatingActionButton btnNewCustomer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,15 @@ public class CustomerActivity extends BaseActivity<CustomerPresenter> implements
         createProgresDialog();
         getPresenter().getCustomerPresenter();
         customerList = (ListView) findViewById(R.id.customer_list_view);
+
+        btnNewCustomer = (FloatingActionButton) findViewById(R.id.activity_customer_fab_launch_create_customer);
+        btnNewCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this, CustomerCreateActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
