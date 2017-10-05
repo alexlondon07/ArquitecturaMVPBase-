@@ -17,6 +17,7 @@ import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductPresenter;
+import io.github.alexlondon07.arquitecturamvpbase.repository.CustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 import io.github.alexlondon07.arquitecturamvpbase.views.adapter.CustomerAdapter;
 import io.github.alexlondon07.arquitecturamvpbase.views.adapter.ProductAdapter;
@@ -30,7 +31,7 @@ public class CustomerActivity extends BaseActivity<CustomerPresenter> implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
-        setPresenter(new CustomerPresenter());
+        setPresenter(new CustomerPresenter(new CustomerRepository()));
         getPresenter().inject(this, getValidateInternet());
         createProgresDialog();
         getPresenter().getCustomerPresenter();

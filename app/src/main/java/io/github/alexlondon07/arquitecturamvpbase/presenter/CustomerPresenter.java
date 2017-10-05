@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.repository.CustomerRepository;
+import io.github.alexlondon07.arquitecturamvpbase.repository.ICustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICustomerView;
 
@@ -14,10 +15,10 @@ import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICustomerView
 
 public class CustomerPresenter extends BasePresenter<ICustomerView> {
 
-    private CustomerRepository customerRepository;
+    private ICustomerRepository customerRepository;
 
-    public CustomerPresenter() {
-        customerRepository = new CustomerRepository();
+    public CustomerPresenter(ICustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     public void getCustomerPresenter() {
@@ -40,7 +41,7 @@ public class CustomerPresenter extends BasePresenter<ICustomerView> {
         thread.start();
     }
 
-    private void getCustomerListService() {
+    public void getCustomerListService() {
         try {
             ArrayList<Customer> customerArrayList = customerRepository.getCustomersList();
             getView().showCustomerList(customerArrayList);

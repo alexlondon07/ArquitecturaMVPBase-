@@ -130,7 +130,7 @@ public class DetailPresenterTest {
         verify(iDetailProductView, never()).showToast(R.string.errorDelete);
     }
 
-    @Test
+    /*@Test
     public void methodCreateCustomerShouldCall() throws RepositoryError{
         RepositoryError repositoryError = new RepositoryError(Constants.DEFAULT_ERROR);
         Customer customer = new Customer();
@@ -140,7 +140,7 @@ public class DetailPresenterTest {
     }
 
 
-    /*public Customer getCustomersList(){
+    public Customer getCustomersList(){
         Customer customer = new Customer();
 
         customer.setName("Alexander");

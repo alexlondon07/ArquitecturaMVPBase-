@@ -13,4 +13,8 @@ public interface ICreateCustomerView extends IBaseView {
     void showAlertDialog(int msg);
 
     void showToast(int msg);
+
+    void showAlertError(int title, int message);
+
+    void showAlertError(int title, String message);
 }
