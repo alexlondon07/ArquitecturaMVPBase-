@@ -39,14 +39,15 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         loadView(convertView);
         name.setText(customer.getName());
         surname.setText(customer.getSurname());
+        if(!customer.getPhoneList().isEmpty() || customer.getPhoneList().size() > 0) {
+            phonelist.setText(customer.getPhoneList().get(0).getNumber().toString());
+        }
         return convertView;
     }
 
     public void loadView(View convertView){
         name = (TextView) convertView.findViewById(R.id.item_name_customer);
         surname = (TextView) convertView.findViewById(R.id.item_surname_customer);
+        phonelist = (TextView) convertView.findViewById(R.id.item_phonelist_customer);
     }
-
-
-
 }

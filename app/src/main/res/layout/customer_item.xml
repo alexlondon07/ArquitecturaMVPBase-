@@ -19,9 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="56dp"
-        android:text="Nombre"
         android:textAppearance="?attr/textAppearanceListItem"
-        tools:text="Alexander" />
+        android:text="Nombre"/>
 
     <TextView
         android:id="@+id/item_surname_customer"
@@ -30,8 +29,15 @@
         android:layout_alignLeft="@+id/item_name_customer"
         android:layout_below="@+id/item_name_customer"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:text="Apellido"
-        tools:text="Londoño" />
+        android:text="Apellido"/>
 
+
+    <TextView
+        android:id="@+id/item_phonelist_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_surname_customer"
+        android:layout_below="@+id/item_surname_customer"
+        android:text="Teléfono"/>
 
 </RelativeLayout>
