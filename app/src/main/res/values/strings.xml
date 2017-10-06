@@ -36,4 +36,6 @@
     <string name="hint_customer_coordinates_location_x">Latitud</string>
     <string name="hint_customer_coordinates_location_y">Longitud</string>
     <string name="hint_customer_coordinates_location_type">Tipo</string>
+    <string name="activity_main_button_product">Productos</string>
+    <string name="activity_main_button_customer">Clientes</string>
 </resources>

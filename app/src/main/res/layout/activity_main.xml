@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context="io.github.alexlondon07.arquitecturamvpbase.views.activities.MainActivity">
+
+    <Button
+        android:id="@+id/activity_main_button_products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_main_button_product"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:padding="30dp"
+        android:onClick="showCustomers"
+        />
+
+    <Button
+        android:id="@+id/activity_main_button_customers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:text="@string/activity_main_button_customer"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:onClick="showProducts"/>
+
+
+</LinearLayout>
