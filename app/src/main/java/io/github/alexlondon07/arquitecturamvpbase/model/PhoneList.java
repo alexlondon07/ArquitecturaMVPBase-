@@ -11,9 +11,6 @@ import java.io.Serializable;
 
 public class PhoneList implements Serializable{
 
-    @SerializedName("descripcion")
-    @Expose
-    private String descripcion;
 
     @SerializedName("number")
     @Expose
@@ -22,15 +19,7 @@ public class PhoneList implements Serializable{
 
     @SerializedName("location")
     @Expose
-    private Location [] location;
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    private Location location;
 
     public String getNumber() {
         return number;
@@ -40,11 +29,11 @@ public class PhoneList implements Serializable{
         this.number = number;
     }
 
-    public Location[] getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Location[] location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 }

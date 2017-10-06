@@ -1,5 +1,4 @@
 package io.github.alexlondon07.arquitecturamvpbase.views.activities;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
@@ -9,13 +8,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductCreatePresenter;
-import io.github.alexlondon07.arquitecturamvpbase.repository.IProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 

@@ -17,7 +17,7 @@ public class Location implements Serializable{
 
     @SerializedName("coordinates")
     @Expose
-    private Double [] coordinates;
+    private Double[] coordinates;
 
     public String getType() {
         return type;

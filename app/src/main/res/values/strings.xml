@@ -27,4 +27,13 @@
     <string name="errorUpdate">Error actualizando el registro</string>
     <string name="text_button_update_product">Actualizar</string>
     <string name="title_activity_customer">CustomerActivity</string>
+    <string name="hint_customer_name">Nombre</string>
+    <string name="hint_customer_surname">Apellido</string>
+    <string name="text_button_create_customer">Crear Cliente</string>
+    <string name="hint_customer_phoneList">Teléfonos</string>
+    <string name="hint_customer_phone_number">Número</string>
+    <string name="hint_customer_coordinates_location">Ubicación</string>
+    <string name="hint_customer_coordinates_location_x">Latitud</string>
+    <string name="hint_customer_coordinates_location_y">Longitud</string>
+    <string name="hint_customer_coordinates_location_type">Tipo</string>
 </resources>

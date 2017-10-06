@@ -28,7 +28,7 @@ public class Customer implements Serializable{
 
     @SerializedName("phoneList")
     @Expose
-    private ArrayList phoneList;
+    private ArrayList<PhoneList> phoneList;
 
     public String getId() {
         return id;
@@ -54,11 +54,11 @@ public class Customer implements Serializable{
         this.surname = surname;
     }
 
-    public ArrayList getPhoneList() {
+    public ArrayList<PhoneList> getPhoneList() {
         return phoneList;
     }
 
-    public void setPhoneList(ArrayList phoneList) {
+    public void setPhoneList(ArrayList<PhoneList> phoneList) {
         this.phoneList = phoneList;
     }
 }

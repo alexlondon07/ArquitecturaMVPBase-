@@ -1,5 +1,7 @@
 package io.github.alexlondon07.arquitecturamvpbase.presenter;
 
+import android.os.Bundle;
+
 import io.github.alexlondon07.arquitecturamvpbase.helper.IValidateInternet;
 import io.github.alexlondon07.arquitecturamvpbase.views.IBaseView;
 
@@ -26,4 +28,5 @@ public class BasePresenter <T extends IBaseView> {
    public IValidateInternet getValidateInternet() {
       return validateInternet;
    }
+
 }
