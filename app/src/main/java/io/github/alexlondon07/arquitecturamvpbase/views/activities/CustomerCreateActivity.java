@@ -3,6 +3,9 @@ package io.github.alexlondon07.arquitecturamvpbase.views.activities;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,7 +20,7 @@ import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerCreatePresen
 import io.github.alexlondon07.arquitecturamvpbase.repository.CustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 
-public class CustomerCreateActivity extends BaseActivity<CustomerCreatePresenter> implements ICreateCustomerView {
+public class CustomerCreateActivity extends BaseActivity<CustomerCreatePresenter> implements ICreateCustomerView,TextWatcher {
 
     private TextInputEditText name, surname, phoneNumber, coordinateX, coordinateY, type;
     private Button btnNewCustomer;
@@ -36,12 +39,47 @@ public class CustomerCreateActivity extends BaseActivity<CustomerCreatePresenter
 
     private void initialize() {
         btnNewCustomer = (Button) findViewById(R.id.activity_create_customer_button_create);
+        disableButton(btnNewCustomer);
+
         name = (TextInputEditText) findViewById(R.id.activity_create_customer_name);
+        name.addTextChangedListener(this);
+
         surname = (TextInputEditText) findViewById(R.id.activity_create_customer_surname);
+        surname.addTextChangedListener(this);
+
         phoneNumber = (TextInputEditText) findViewById(R.id.activity_create_customer_phone_number);
+        phoneNumber.addTextChangedListener(this);
+
         coordinateX = (TextInputEditText) findViewById(R.id.activity_create_customer_coordinates_location_x);
+        coordinateX.addTextChangedListener(this);
+
         coordinateY = (TextInputEditText) findViewById(R.id.activity_create_customer_coordinates_location_y);
+        coordinateY.addTextChangedListener(this);
+
         createProgresDialog();
+    }
+
+
+    public void validateFields(){
+        if( name.getText().toString().isEmpty() ||
+                surname.getText().toString().isEmpty() ||
+                phoneNumber.getText().toString().isEmpty()  ||
+                coordinateX.getText().toString().isEmpty()  ||
+                coordinateY.getText().toString().isEmpty()){
+            disableButton(btnNewCustomer);
+        }else{
+            enableButton(btnNewCustomer);
+        }
+    }
+    public void enableButton(Button button){
+        button.setEnabled(true);
+        button.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
+
+    }
+
+    public void disableButton(Button button){
+        button.setEnabled(false);
+        button.setBackgroundColor(ContextCompat.getColor(this,R.color.colorWhite));
     }
 
     private void loadEvents() {
@@ -136,5 +174,20 @@ public class CustomerCreateActivity extends BaseActivity<CustomerCreatePresenter
     @Override
     public void showAlertError(int title, String message) {
 
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        validateFields();
     }
 }
