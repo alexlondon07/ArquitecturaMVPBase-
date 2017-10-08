@@ -2,42 +2,131 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp">
+    android:background="@color/colorGray"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/iv_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/android_6_xxl"/>
-
-    <TextView
-        android:id="@+id/item_name_customer"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:text="Nombre"/>
-
-    <TextView
-        android:id="@+id/item_surname_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/item_name_customer"
-        android:layout_below="@+id/item_name_customer"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:text="Apellido"/>
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
 
-    <TextView
-        android:id="@+id/item_phonelist_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/item_surname_customer"
-        android:layout_below="@+id/item_surname_customer"
-        android:text="Teléfono"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/android_6_xxl"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Datos cliente"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/item_name_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_alignParentRight="true"
+                    android:text="Nombre"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellido"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_below="@+id/item_name_customer"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/item_surname_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:text="Apellido"
+                    android:layout_below="@+id/item_name_customer"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfonos"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/item_phonelist_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Teléfonos"
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimaryDark" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>
