@@ -16,20 +16,20 @@
         android:theme="@style/AppTheme">
         <activity android:name=".views.activities.ProductActivity" />
         <activity android:name=".views.activities.DetailsActivity" />
-
         <activity android:name=".views.activities.ProductCreateActivity">
         </activity>
 
         <activity android:name=".views.activities.ProductUpdateActivity" />
         <activity android:name=".views.activities.CustomerActivity">
-        </activity>
-        <activity android:name=".views.activities.CustomerCreateActivity" />
-        <activity android:name=".views.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".views.activities.CustomerCreateActivity" />
+        <activity android:name=".views.activities.MainActivity">
+
         </activity>
     </application>
 
