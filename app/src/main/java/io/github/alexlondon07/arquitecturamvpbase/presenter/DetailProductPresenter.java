@@ -23,22 +23,31 @@ public class DetailProductPresenter extends BasePresenter<IDetailProductView> {
     }
 
     public void deleteProduct(String id) {
-        /*if(getValidateInternet().isConnected()){
+        if(getValidateInternet().isConnected()){
             deleteThreadDeleteProduct(id);
         }else {
-            getView().showAlertDialog(R.string.validate_internet);
-        }*/
-        deleteThreadDeleteProduct(id);
+            //getView().showAlertDialog(R.string.validate_internet);
+            deleteThreadDeleteProductLocal(id);
+        }
     }
 
+    public void deleteThreadDeleteProductLocal(final String id) {
+        getView().showProgress(R.string.loading_message);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                deleteProductLocal(id);
+            }
+        });
+        thread.start();
+    }
 
     public void deleteThreadDeleteProduct(final String id) {
         getView().showProgress(R.string.loading_message);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //deleteProductService(id);
-                deleteProductLocal(id);
+                deleteProductService(id);
             }
         });
         thread.start();
