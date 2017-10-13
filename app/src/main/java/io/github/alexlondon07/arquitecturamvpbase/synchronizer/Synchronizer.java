@@ -34,14 +34,14 @@ public class Synchronizer {
         if(isConnected){
             ArrayList<Product> productArrayList = Database.productDao.fetchAllProducts();
             for(Product obj:productArrayList){
+                if(obj.getSync().equals("0")){
+                    //Sync the product
+                    productRepository.saveProduct(obj);
 
-                //Sync the product
-                productRepository.saveProduct(obj);
-
-                //Update when a finished the Sync
-                obj.setSync("1");
-                Database.productDao.updateProduct(obj.getId(), obj);
-
+                    //Update when finished the Sync
+                    obj.setSync("1");
+                    Database.productDao.updateProduct(obj.getId(), obj);
+                }
             }
         }
 

@@ -76,7 +76,9 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
     @Override
     public Boolean deleteProduct(String id) {
         try {
-            return super.delete(PRODUCT_TABLE, COLUMN_ID +"="+id, null) > 0;
+            String selection = COLUMN_ID + " = ?";
+            String[] selectionArgs = { id };
+            return super.delete(PRODUCT_TABLE, selection, selectionArgs) > 0;
         }catch (SQLiteConstraintException ex){
             Log.e("DBErrorDeleteProduct", ex.getMessage());
             return false;
@@ -87,7 +89,9 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
     public Boolean updateProduct(String id, Product product) {
         setContentValue(product);
         try{
-            return super.update(PRODUCT_TABLE, getContentValue(), COLUMN_ID + "="+id, null) > 0;
+            String selection = COLUMN_ID + " = ?";
+            String[] selectionArgs = { id };
+            return super.update(PRODUCT_TABLE, getContentValue(), selection, selectionArgs) > 0;
         }catch (SQLiteConstraintException ex){
             Log.e("DBErrorUpdateProduct", ex.getMessage());
             return false;
