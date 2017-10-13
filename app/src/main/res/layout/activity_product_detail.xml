@@ -107,7 +107,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_below="@id/product_detail_quantity"
             />
-
+        
             <Button
                 android:id="@+id/activity_create_product_button_delete"
                 android:layout_width="match_parent"

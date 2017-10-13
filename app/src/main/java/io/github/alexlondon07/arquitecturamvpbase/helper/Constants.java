@@ -6,6 +6,7 @@ package io.github.alexlondon07.arquitecturamvpbase.helper;
 
 public class Constants {
 
+    public  final static String TAG_APP = "***** MVP *****";
     public final static String URL_BASE_TESTING  = "https://shoppingproducts.herokuapp.com/";
     public final static int TIME_OUT = 6;
     public final static String ITEM_PRODUCT = "ItemProduct";
@@ -18,7 +19,7 @@ public class Constants {
 
     //DATABASE
     public  static final String DATABASE_NAME = "shopping_db";
-    public  static final int DATABASE_VERSION = 2;
+    public  static final int DATABASE_VERSION = 3;
 
 
 }

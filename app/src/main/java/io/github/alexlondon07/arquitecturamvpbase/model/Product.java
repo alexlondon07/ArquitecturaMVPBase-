@@ -31,6 +31,19 @@ public class Product implements Serializable {
     @Expose
     private String quantity;
 
+    @SerializedName("sync")
+    @Expose
+    private String sync;
+
+
+
+    public String getSync() {
+        return sync;
+    }
+
+    public void setSync(String sync) {
+        this.sync = sync;
+    }
 
     public String getId() {
         return id;

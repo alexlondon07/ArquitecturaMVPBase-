@@ -26,7 +26,7 @@ public class ProductAdapter extends ArrayAdapter<Product>{
     private ArrayList<Product> productArrayList;
     private Activity context;
     private  Product product;
-    private TextView name;
+    private TextView name, sync;
 
 
     public ProductAdapter(Activity context,  int resouce, ArrayList<Product> productArrayList){

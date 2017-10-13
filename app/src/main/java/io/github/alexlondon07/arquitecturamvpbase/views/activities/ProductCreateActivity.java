@@ -16,7 +16,7 @@ import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 
 public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> implements ICreateProductView, TextWatcher {
 
-    private TextInputEditText name, description, quantity, price;
+    private TextInputEditText name, description, quantity, price, sync;
     private Button btn_create;
 
     @Override
@@ -63,6 +63,7 @@ public class ProductCreateActivity extends BaseActivity<ProductCreatePresenter> 
         product.setDescription(description.getText().toString());
         product.setQuantity(quantity.getText().toString());
         product.setPrice(price.getText().toString());
+
         getPresenter().createNewProduct(name.getText().toString(), description.getText().toString(), quantity.getText().toString(),price.getText().toString());
     }
 

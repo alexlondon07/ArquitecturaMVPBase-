@@ -49,6 +49,7 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
         initialValues.put(COLUMN_PRODUCT_DESCRIPTION, product.getDescription());
         initialValues.put(COLUMN_PRODUCT_QUANTITY, product.getQuantity());
         initialValues.put(COLUMN_PRODUCT_PRICE, product.getPrice());
+        initialValues.put(COLUMN_PRODUCT_SYNC, product.getSync());
     }
 
     public ContentValues getContentValue(){
@@ -122,6 +123,11 @@ public class ProductDao extends DbContentProvider implements IProductScheme, IPr
             if(cursor.getColumnIndex(COLUMN_PRODUCT_QUANTITY) != -1){
                 nameIndex = cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_QUANTITY);
                 product.setQuantity(cursor.getString(nameIndex));
+            }
+
+            if(cursor.getColumnIndex(COLUMN_PRODUCT_SYNC) != -1){
+                nameIndex = cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_SYNC);
+                product.setSync(cursor.getString(nameIndex));
             }
         }
         return product;

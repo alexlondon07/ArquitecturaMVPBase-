@@ -31,12 +31,13 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
         product.setDescription(description);
         product.setPrice(price);
         product.setQuantity(quantity);
-        /*if (getValidateInternet().isConnected()){
+        if (getValidateInternet().isConnected()){
             createThreadProduct(product);
         }else{
-            getView().showAlertDialog(R.string.validate_internet);
-        }*/
-        createThreadProduct(product);
+            //getView().showAlertDialog(R.string.validate_internet);
+            product.setSync("0");
+            createThreadProductLocal(product);
+        }
     }
 
 
@@ -45,7 +46,17 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //createNewProductService(product);
+                createNewProductService(product);
+            }
+        });
+        thread.start();
+    }
+
+    public void createThreadProductLocal(final Product product) {
+        getView().showProgress(R.string.loading_message);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
                 createNewProductLocal(product);
             }
         });
@@ -63,7 +74,7 @@ public class ProductCreatePresenter extends BasePresenter<ICreateProductView> {
 
     private void createNewProductService(Product product){
         try{
-            Product isCreated = productRepository.saveProduct(product);
+            productRepository.saveProduct(product);
             getView().responseCreateProduct(true);
         }catch (RetrofitError retrofitError){
             getView().responseCreateProduct(false);
