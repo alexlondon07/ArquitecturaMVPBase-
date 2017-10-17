@@ -21,5 +21,9 @@ public class Constants {
     public  static final String DATABASE_NAME = "shopping_db";
     public  static final int DATABASE_VERSION = 3;
 
+    public static final String TITTLE_PRODUCT = "Productos";
+    public static final String TITTLE_CUSTOMER = "Clientes";
+    public static final String EMPTY = "";
+
 
 }

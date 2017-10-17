@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.github.alexlondon07.arquitecturamvpbase.views.activities.DashBoardActivity"
+    android:background="@color/colorWhite">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:background="@drawable/header_background">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+        </android.support.v7.widget.Toolbar>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:src="@drawable/logo"/>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/dashBoard_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Large">
+
+        </android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/dashBoard_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+</android.support.design.widget.CoordinatorLayout>

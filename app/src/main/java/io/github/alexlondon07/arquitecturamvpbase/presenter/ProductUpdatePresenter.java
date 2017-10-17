@@ -22,20 +22,30 @@ public class ProductUpdatePresenter extends BasePresenter<IUpdateProductView>{
     }
 
     public void updateProductPresenter(String id, Product product) {
-        /*if(getValidateInternet().isConnected()){
+        if(getValidateInternet().isConnected()){
             createThreadUpdateProduct(id, product);
         }else {
-            getView().showAlertDialog(R.string.validate_internet);
-        }*/
-        createThreadUpdateProduct(id, product);
+            //getView().showAlertDialog(R.string.validate_internet);
+            createThreadUpdateProductLocal(id, product);
+        }
+
+    }
+
+    public void createThreadUpdateProductLocal(final String id, final Product product) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                updateProductLocal(id, product);
+            }
+        });
+        thread.start();
     }
 
     public void createThreadUpdateProduct(final String id, final Product product) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //updateProductService(id, product);
-                updateProductLocal(id, product);
+                updateProductService(id, product);
             }
         });
         thread.start();

@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -16,17 +21,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".views.activities.ProductActivity" />
         <activity android:name=".views.activities.DetailsActivity" />
-        <activity android:name=".views.activities.ProductCreateActivity">
+        <activity android:name=".views.activities.ProductCreateActivity" />
+        <activity android:name=".views.activities.ProductUpdateActivity" />
+        <activity android:name=".views.activities.CustomerActivity" />
+        <activity android:name=".views.activities.CustomerCreateActivity" />
+        <activity android:name=".views.activities.MainActivity" />
+
+        <activity android:name=".views.activities.DashBoardActivity">
         </activity>
 
-        <activity android:name=".views.activities.ProductUpdateActivity" />
-        <activity android:name=".views.activities.CustomerActivity">
-        </activity>
-        <activity android:name=".views.activities.CustomerCreateActivity" />
-        <activity android:name=".views.activities.MainActivity">
+        <activity android:name=".views.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

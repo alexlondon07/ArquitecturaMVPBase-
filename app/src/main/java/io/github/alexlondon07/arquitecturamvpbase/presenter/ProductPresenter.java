@@ -32,7 +32,6 @@ public class ProductPresenter extends BasePresenter<IProductView> {
             //getView().showAlertDialogInternet(R.string.error, R.string.validate_internet);
             createThreadProductLocal();
         }
-
     }
 
     private void createThreadProductLocal() {
@@ -78,6 +77,5 @@ public class ProductPresenter extends BasePresenter<IProductView> {
         }finally {
             getView().hidePorgress();
         }
-
     }
 }
