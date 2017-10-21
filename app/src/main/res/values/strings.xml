@@ -59,4 +59,6 @@
     <string name="hint_login_password">Password</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_button">Iniciar sessión</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="maps">Ubicación</string>
 </resources>

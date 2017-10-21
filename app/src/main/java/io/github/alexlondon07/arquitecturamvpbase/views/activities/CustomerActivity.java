@@ -7,7 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
 
@@ -24,9 +31,11 @@ import io.github.alexlondon07.arquitecturamvpbase.views.adapter.ProductAdapter;
 
 public class CustomerActivity extends BaseActivity<CustomerPresenter> implements ICustomerView {
 
+    private GoogleMap mMap;
     private ListView customerList;
     private CustomerAdapter customerAdapter;
     private FloatingActionButton btnNewCustomer;
+    private Button btnMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,5 +111,14 @@ public class CustomerActivity extends BaseActivity<CustomerPresenter> implements
     public void callAdapter(final ArrayList<Customer> customerArrayList){
         customerAdapter = new CustomerAdapter(this, R.id.customer_list_view, customerArrayList);
         customerList.setAdapter(customerAdapter);
+        customerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent(CustomerActivity.this, MapsActivity.class);
+                intent.putExtra(Constants.ITEM_CUSTOMER, customerArrayList.get(position));
+                startActivity(intent);
+            }
+        });
     }
+
 }
