@@ -9,9 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -43,10 +40,9 @@ import io.github.alexlondon07.arquitecturamvpbase.model.Location;
 import io.github.alexlondon07.arquitecturamvpbase.model.PhoneList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    private GoogleMap mMap;
-    private  String TAG = "MapsActivity.class";
 
-    private TextView name;
+    private GoogleMap mMap;
+    private String TAG = "MapsActivity.class";
     private Customer customer;
 
     @Override
@@ -97,21 +93,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void createMarkers() {
+        ArrayList<PhoneList> phoneList = customer.getPhoneList();
+        ArrayList<LatLng> points = new ArrayList<>();
+
+        for (PhoneList phone :phoneList){
+            Location location = phone.getLocation();
+            LatLng point = new LatLng(location.getCoordinates()[0], location.getCoordinates()[1]);
+            mMap.addMarker(new MarkerOptions().position(point)
+                    .snippet(customer.getName())
+                    .title(phone.getDescription())
+                    .icon(bitmapDescriptorFromVector(this, R.drawable.ic_location_on_black_24dp)));
+            points.add(point);
+        }
+        calculateRouteCustomer(points);
+    }
+
     private void changeStateControls() {
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setZoomControlsEnabled(true);
     }
 
-    private void createMarkers() {
-        ArrayList<LatLng> points = new ArrayList<>();
-        for (PhoneList phoneList :customer.getPhoneList()){
-            Location location  = phoneList.getLocation();
-            LatLng point = new LatLng(location.getCoordinates()[0], location.getCoordinates()[1]);
-            mMap.addMarker(new MarkerOptions().position(point).title(location.getType()).icon(bitmapDescriptorFromVector(this, R.drawable.ic_location_on_black_24dp)));
-            points.add(point);
-        }
-        calculateRouteCustomer(points);
-    }
+
 
     RoutingListener routingListener = new RoutingListener() {
         @Override
@@ -131,7 +134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for(int i = 0; i < routes.size(); i++){
                 PolylineOptions polyLineOptions = new PolylineOptions();
                 polyLineOptions.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
-                polyLineOptions.width(10);
+                polyLineOptions.width(7);
                 polyLineOptions.addAll(routes.get(i).getPoints());
 
                 Polyline polyLine = mMap.addPolyline(polyLineOptions);
@@ -156,6 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .waypoints(points)
                 .key(getString(R.string.google_maps_key))
                 .optimize(true)
+                .alternativeRoutes(true)
                 .withListener(routingListener)
                 .build();
         routing.execute();
@@ -165,23 +169,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorId) {
+
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorId);
         vectorDrawable.setBounds(0,0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
+
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
     public void centerRoutes(ArrayList<LatLng> points){
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for(LatLng latLng: points){
+        for(LatLng latLng : points){
             builder.include(latLng);
         }
 
         LatLngBounds bounds = builder.build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 50);
-        mMap.animateCamera(cameraUpdate);
+
+        //https://github.com/OneBusAway/onebusaway-android/issues/581
+
+        //Setting the width and height of your screen
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.12); // offset from edges of the map 12% of screen
+
+        mMap.animateCamera((CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding)));
     }
 
 }
