@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -17,7 +17,6 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +31,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
@@ -114,8 +114,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         uisettings.setZoomControlsEnabled(true);
     }
 
-
-
     RoutingListener routingListener = new RoutingListener() {
         @Override
         public void onRoutingFailure(RouteException e) {
@@ -130,20 +128,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onRoutingSuccess(ArrayList<Route> routes, int shortestRouteIndex) {
 
+            String [] colorsAll = getResources().getStringArray(R.array.array_colors);
             ArrayList polyLines = new ArrayList<>();
+
             for(int i = 0; i < routes.size(); i++){
                 PolylineOptions polyLineOptions = new PolylineOptions();
-                polyLineOptions.color(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
-                polyLineOptions.width(7);
+                int valor = new Random().nextInt(colorsAll.length);
+                polyLineOptions.color(Color.parseColor(colorsAll[valor]));
+                polyLineOptions.width(8);
                 polyLineOptions.addAll(routes.get(i).getPoints());
-
                 Polyline polyLine = mMap.addPolyline(polyLineOptions);
                 polyLines.add(polyLine);
-
-                int distance = routes.get(i).getDistanceValue();
-                int duration = routes.get(i).getDurationValue();
-
-                //Toast.makeText(MapsActivity.this, " Distance: " +distance+  " and duration " + duration, Toast.LENGTH_LONG).show();
             }
         }
 
@@ -158,7 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .waypoints(points)
                 .key(getString(R.string.google_maps_key))
-                .optimize(true)
+                //.optimize(true)
                 .alternativeRoutes(true)
                 .withListener(routingListener)
                 .build();

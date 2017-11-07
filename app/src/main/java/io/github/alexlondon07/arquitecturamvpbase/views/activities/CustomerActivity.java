@@ -4,38 +4,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
-import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerPresenter;
-import io.github.alexlondon07.arquitecturamvpbase.presenter.ProductPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.repository.CustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.BaseActivity;
 import io.github.alexlondon07.arquitecturamvpbase.views.adapter.CustomerAdapter;
-import io.github.alexlondon07.arquitecturamvpbase.views.adapter.ProductAdapter;
 
 public class CustomerActivity extends BaseActivity<CustomerPresenter> implements ICustomerView {
 
-    private GoogleMap mMap;
     private ListView customerList;
     private CustomerAdapter customerAdapter;
     private FloatingActionButton btnNewCustomer;
-    private Button btnMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

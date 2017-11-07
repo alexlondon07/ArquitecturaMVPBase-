@@ -9,6 +9,22 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
+
+
+    <string-array name="array_colors">
+        <item>#AD1457</item>
+        <item>#6A1B9A</item>
+        <item>#2196F3</item>
+        <item>#80CBC4</item>
+        <item>#4CAF50</item>
+        <item>#8BC34A</item>
+        <item>#CDDC39</item>
+        <item>#76FF03</item>
+        <item>#FFC107</item>
+        <item>#F06292</item>
+        <item>#CE93D8</item>
+        <item>#FF5252</item>
+    </string-array>
 </resources>
 
 
