@@ -5,11 +5,11 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
-import io.github.alexlondon07.arquitecturamvpbase.dao.ProductDao;
 import io.github.alexlondon07.arquitecturamvpbase.helper.Database;
+import io.github.alexlondon07.arquitecturamvpbase.model.Note;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
+import io.github.alexlondon07.arquitecturamvpbase.repository.NoteRepository;
 import io.github.alexlondon07.arquitecturamvpbase.repository.ProductRepository;
-import io.github.alexlondon07.arquitecturamvpbase.repository.RepositoryError;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.IProductView;
 import retrofit.RetrofitError;
 
@@ -20,9 +20,11 @@ import retrofit.RetrofitError;
 public class ProductPresenter extends BasePresenter<IProductView> {
 
     private ProductRepository productRepository;
+    private NoteRepository noteRepository;
 
     public ProductPresenter() {
         productRepository = new ProductRepository();
+        noteRepository = new NoteRepository();
     }
 
     public void getProductsPresenter() {
@@ -70,8 +72,14 @@ public class ProductPresenter extends BasePresenter<IProductView> {
 
     public void getProductList(){
         try {
+
+            Note note = noteRepository.getNote();
+            Log.e("Note", note.getBody());
+
             ArrayList<Product> productArrayList = productRepository.getProductList();
             getView().showProductList(productArrayList);
+
+
         }catch (RetrofitError retrofitError){
             getView().showAlertError(R.string.error, R.string.validate_internet);
         }finally {

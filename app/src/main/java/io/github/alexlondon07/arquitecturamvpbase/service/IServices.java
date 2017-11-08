@@ -3,6 +3,7 @@ package io.github.alexlondon07.arquitecturamvpbase.service;
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
+import io.github.alexlondon07.arquitecturamvpbase.model.Note;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import retrofit.http.Body;
@@ -36,4 +37,6 @@ public interface IServices {
     @POST("/customers")
     Customer saveCustomer(@Body Customer customer);
 
+    @GET("/note.xml")
+    Note getNote();
 }

@@ -3,6 +3,7 @@ package io.github.alexlondon07.arquitecturamvpbase.repository;
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.helper.ServicesFactory;
+import io.github.alexlondon07.arquitecturamvpbase.helper.TypeDecryption;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
 import io.github.alexlondon07.arquitecturamvpbase.model.Product;
 import io.github.alexlondon07.arquitecturamvpbase.service.IServices;
@@ -17,7 +18,7 @@ public class ProductRepository implements IProductRepository {
 
 
     public ProductRepository() {
-        ServicesFactory servicesfactory = new ServicesFactory();
+        ServicesFactory servicesfactory = new ServicesFactory(TypeDecryption.JSON);
         services = (IServices) servicesfactory.getInstance(IServices.class);
     }
 

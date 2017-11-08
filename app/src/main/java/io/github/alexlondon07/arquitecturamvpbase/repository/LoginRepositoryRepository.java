@@ -1,6 +1,7 @@
 package io.github.alexlondon07.arquitecturamvpbase.repository;
 
 import io.github.alexlondon07.arquitecturamvpbase.helper.ServicesFactory;
+import io.github.alexlondon07.arquitecturamvpbase.helper.TypeDecryption;
 import io.github.alexlondon07.arquitecturamvpbase.model.User;
 import io.github.alexlondon07.arquitecturamvpbase.service.ILoginServices;
 import retrofit.RetrofitError;
@@ -14,7 +15,7 @@ public class LoginRepositoryRepository implements ILoginRepository {
     ILoginServices service;
 
     public LoginRepositoryRepository(){
-        ServicesFactory servicesFactory = new ServicesFactory();
+        ServicesFactory servicesFactory = new ServicesFactory(TypeDecryption.JSON);
         service = (ILoginServices) servicesFactory.getInstance(ILoginServices.class);
     }
 

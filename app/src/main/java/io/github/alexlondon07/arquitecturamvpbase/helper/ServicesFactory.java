@@ -10,6 +10,7 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
+import retrofit.converter.SimpleXMLConverter;
 
 /**
  * Created by alexlondon07 on 9/16/17.
@@ -18,10 +19,25 @@ import retrofit.converter.GsonConverter;
 public class ServicesFactory {
 
     private static final String API_BASE_PATH = Constants.URL_BASE_TESTING;
+    private static final String API_XML_BASE_PATH = Constants.URL_XML_BASE;
     private RestAdapter restAdapter;
 
-    public ServicesFactory() {
-        createServicesFactoryInstance(getGsonConverter(), API_BASE_PATH);
+    public ServicesFactory(TypeDecryption type) {
+        Converter converter = null;
+        String baseURL = "";
+        switch (type) {
+            case XML:
+                baseURL = API_XML_BASE_PATH;
+                converter = new SimpleXMLConverter();
+                break;
+
+            case JSON:
+                baseURL = API_BASE_PATH;
+                converter =  getGsonConverter();
+                break;
+        }
+        createServicesFactoryInstance(converter, baseURL);
+        //createServicesFactoryInstance(getGsonConverter(), API_BASE_PATH);
     }
 
     private void createServicesFactoryInstance(Converter converter, String baseUrl) {

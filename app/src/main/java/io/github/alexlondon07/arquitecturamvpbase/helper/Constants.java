@@ -26,4 +26,5 @@ public class Constants {
     public static final String EMPTY = "";
 
 
+    public static final String URL_XML_BASE = "https://www.w3schools.com/xml/";
 }

@@ -3,6 +3,7 @@ package io.github.alexlondon07.arquitecturamvpbase.repository;
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.helper.ServicesFactory;
+import io.github.alexlondon07.arquitecturamvpbase.helper.TypeDecryption;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.service.IServices;
 import retrofit.RetrofitError;
@@ -16,7 +17,7 @@ public class CustomerRepository implements ICustomerRepository {
     private IServices services;
 
     public CustomerRepository() {
-        ServicesFactory servicesfactory = new ServicesFactory();
+        ServicesFactory servicesfactory = new ServicesFactory(TypeDecryption.JSON);
         services = (IServices) servicesfactory.getInstance(IServices.class);
     }
 
