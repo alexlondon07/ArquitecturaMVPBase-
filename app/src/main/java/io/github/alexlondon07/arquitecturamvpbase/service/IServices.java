@@ -2,6 +2,7 @@ package io.github.alexlondon07.arquitecturamvpbase.service;
 
 import java.util.ArrayList;
 
+import io.github.alexlondon07.arquitecturamvpbase.model.BreakfastMenu;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.model.Note;
 import io.github.alexlondon07.arquitecturamvpbase.model.ProductResponse;
@@ -39,4 +40,8 @@ public interface IServices {
 
     @GET("/note.xml")
     Note getNote();
+
+    @GET("/simple.xml")
+    BreakfastMenu getBreakfastMenu();
+
 }
